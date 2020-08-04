@@ -35,6 +35,9 @@ extern BOOL enableLog;
 
 - (void)handleMethodCall:(FlutterMethodCall *)methodCall result:(FlutterResult)methodResult {
     id rawArgs = [methodCall arguments];
+    NSDictionary<NSString*, id>* args = (NSDictionary<NSString*, id>*) rawArgs;
+        NSNumber *refId = (NSNumber *) args[@"refId"];
+        if(![refId isEqualToNumber:@0]){
     if ([methodCall.method hasPrefix:@"CLLocationCoordinate2D"]) {
         CLLocationCoordinate2DHandler(methodCall.method, rawArgs, methodResult);
     } else if ([methodCall.method hasPrefix:@"CLLocation"]) {
@@ -48,6 +51,7 @@ extern BOOL enableLog;
     } else {
         methodResult(FlutterMethodNotImplemented);
     }
+  }
 }
 
 @end
